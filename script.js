@@ -6,10 +6,14 @@ var cardSelectApp = (function () {
     var frameCount;
     
     var my = {};
+    my.initialState = $("#cardSelectApp").html();
     
     my.init = function () {
         //console.log("hello world");
+        frameCount = 1;
+
         var selectionCount = 0;
+        $(".phase1").show();
         $(".phase2").hide();
         
         $(".card").each(function(){
@@ -74,9 +78,9 @@ var cardSelectApp = (function () {
                 .addClass("card")
                 .attr("style","");
             
-            $(".selectedCard")
+            /*$(".selectedCard")
                 .wrap("<div class='flipContainer flipped'></div>")
-                .wrap("<div class='flipper'></div>");
+                .wrap("<div class='flipper'></div>");*/
             
             $(".selectedCard img")
                 .wrap("<div class='cardFront'></div>");
@@ -84,10 +88,10 @@ var cardSelectApp = (function () {
             $(".selectedCard .cardFront")
                 .after("<div class='cardBack'></div>");
             
-            $("div.flipContainer:nth-child(1)").on('click',my.next);
-            $("div.flipContainer:nth-child(1) .flipper").after("<p>Past</p>");
-            $("div.flipContainer:nth-child(2) .flipper").after("<p>Present</p>");
-            $("div.flipContainer:nth-child(3) .flipper").after("<p>Future</p>");
+            $("div.selectedCard:nth-child(1)").on('click',my.next);
+            $("div.selectedCard:nth-child(1) .cardBack").after("<p>Past</p>");
+            $("div.selectedCard:nth-child(2) .cardBack").after("<p>Present</p>");
+            $("div.selectedCard:nth-child(3) .cardBack").after("<p>Future</p>");
                 
         });
         
@@ -100,14 +104,14 @@ var cardSelectApp = (function () {
 
         if(frameCount === 1){
             my.flipCard(1);
-            $("div.flipContainer:nth-child(1)").off();
-            $("div.flipContainer:nth-child(2)").on('click',my.next);
+            $("div.selectedCard:nth-child(1)").off();
+            $("div.selectedCard:nth-child(2)").on('click',my.next);
         } else if(frameCount === 2){
             
             my.flipCard(1);
             my.flipCard(2);
-            $("div.flipContainer:nth-child(2)").off();
-            $("div.flipContainer:nth-child(3)").on('click',my.next);
+            $("div.selectedCard:nth-child(2)").off();
+            $("div.selectedCard:nth-child(3)").on('click',my.next);
         } else if(frameCount === 3){
             my.flipCard(2);
             my.flipCard(3);
@@ -132,7 +136,23 @@ var cardSelectApp = (function () {
     }
     
     my.flipCard = function(flipNum){
-        $("div.flipContainer:nth-child("+flipNum+")").toggleClass("flipped");
+        $("div.selectedCard:nth-child("+flipNum+")").toggleClass("flipped");
+    }
+    
+    my.reset = function(){
+        var appContainer = $("#cardSelectApp");
+        appContainer.hide();
+        appContainer.html("");
+        //due to DOM syncronisation weirdness pause between each step
+        window.setTimeout(function(){
+            appContainer.html(my.initialState);
+        },500);
+        
+        window.setTimeout(function(){
+            my.init();
+        }, 500);
+        appContainer.show();
+        
     }
 
     

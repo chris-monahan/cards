@@ -54,50 +54,39 @@ body {
 .phase2 {
   margin: 0 auto;
   text-align: center;
-  margin-top: 10%;
-  /* flip the pane when hovered */
-  /* flip speed goes here */
-  /* hide back of pane during swap */ }
-  .phase2 .selectedCard {
-    display: inline-block;
-    width: 270px;
-    height: 500px; }
+  margin-top: 10%; }
   .phase2 .selectedCard img,
   .phase2 .cardBack {
     width: 270px;
     height: 414px; }
-  .phase2 .flipContainer p {
-    position: relative;
-    right: 34px;
+  .phase2 .selectedCard p {
+    bottom: 20px;
     font-family: monospace;
-    font-size: 14pt; }
-  .phase2 .flipContainer {
-    perspective: 1000px;
+    font-size: 14pt;
+    text-align: center;
+    margin-top: calc(100% + 30px); }
+  .phase2 .selectedCard {
     display: inline-block;
     width: 400px;
+    height: 500px;
     padding: 10px;
     padding-bottom: 10px;
-    position: relative; }
-  .phase2 .flipContainer.flipped .flipper {
-    transform: rotateY(180deg);
-    right: 100px; }
-  .phase2 .flipContainer .flipper {
-    transition: 0.6s;
-    transform-style: preserve-3d;
-    position: relative; }
-  .phase2 .cardFront, .phase2 .cardBack {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0px; }
-  .phase2 .cardBack {
-    background-color: brown; }
-  .phase2 .cardFront {
-    z-index: 2;
-    /* for firefox 31 */
-    transform: rotateY(0deg); }
-  .phase2 .cardBack {
-    transform: rotateY(180deg); }
+    position: relative;
+    text-align: center;
+    vertical-align: bottom;
+    z-index: 0; }
+    .phase2 .selectedCard .cardBack, .phase2 .selectedCard .cardFront {
+      position: absolute;
+      top: 0px;
+      left: calc(50% - 135px); }
+    .phase2 .selectedCard .cardBack {
+      background-color: brown; }
+    .phase2 .selectedCard .cardFront {
+      z-index: 1;
+      transition: opacity 1s ease-in-out;
+      opacity: 0; }
+  .phase2 .selectedCard.flipped .cardFront {
+    opacity: 1; }
   .phase2 .textContainer {
     border-top: 3px solid black;
     padding-top: 40px; }
@@ -111,7 +100,6 @@ body {
       padding: 10px 20px 10px 20px;
       border: solid #1f628d 0px;
       text-decoration: none;
-      margin-top: 100px;
       cursor: pointer; }
     .phase2 .textContainer a#nextButton:hover {
       background: #3c91fa;

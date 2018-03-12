@@ -87,57 +87,58 @@ body{
 
 
 
-    .flipContainer p{
-        position:relative;
-        right:35px;
+    .selectedCard p{
+        bottom:20px;
         font-family: monospace;
         font-size: 14pt;
+        text-align:center;
+        margin-top:calc(100% + 30px);
     }
-    .flipContainer {
-        perspective: 1000px;
+    .selectedCard {
         display:inline-block;
         width:400px;
+        height:500px;
         padding:10px;
         padding-bottom:10px;
         position:relative;
+        text-align:center;
+        vertical-align:bottom;
+        
+        z-index:0;
+        
+        .cardBack, .cardFront{
+            position:absolute;
+            top:0px;
+            left:calc(50% - 135px);
+        }
+        
+        .cardBack{
+            background-color:brown;
+        }
+        
+        .cardFront{
+            z-index:1;
+            transition:opacity 1s ease-in-out;
+            opacity:0;
+        }
+        
+        
         
     }
-        /* flip the pane when hovered */
-        .flipContainer.flipped .flipper{
-            transform: rotateY(180deg);
-            right:100px;
+    
+    
+    .selectedCard.flipped{
+        .cardFront{
+            opacity:1;
         }
-
-
-    /* flip speed goes here */
-    .flipContainer .flipper {
-        transition: 0.6s;
-        transform-style: preserve-3d;
-        position: relative;
-    }
-
-    /* hide back of pane during swap */
-    .cardFront, .cardBack {
-        backface-visibility: hidden;
-
-        position: absolute;
-        top: 0;
-        left: 0px;
     }
     
-    .cardBack{
-        background-color:brown;
-    }
+    
 
-    .cardFront {
-        z-index: 2;
-        /* for firefox 31 */
-        transform: rotateY(0deg);
-    }
+    
+    
+    
 
-    .cardBack {
-        transform: rotateY(180deg);
-    }
     
     .textContainer{
         border-top:3px solid black;
