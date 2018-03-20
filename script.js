@@ -17,6 +17,12 @@ var cardSelectApp = (function () {
         $(".phase2").hide();
         
         $(".card").each(function(){
+            $(this).find("img")
+                .wrap("<div class='cardFront'></div>");
+            
+            $(this).find(".cardFront")
+                .after("<div class='cardBack'></div>");
+            
             $(this).on("click", function(){
                 selectionCount = selectionCount + 1;
                 $(this).find("img")
@@ -34,21 +40,23 @@ var cardSelectApp = (function () {
                 selectedCard.css("left",startingPosition.left);
                 selectedCard.addClass("animated");
                 
+                
+                
                 if(selectionCount === 1){
 
                     selectedCard.animate({
                         top:"90vh",
-                        left:($(document).width() / 2) - 400,
+                        left:(my.getGutterOffset(selectedCard) - 400)
                     });
                 } else if (selectionCount === 2){
                     selectedCard.animate({
                         top:"90vh",
-                        left:($(document).width() / 2)
+                        left:my.getGutterOffset(selectedCard)
                     });
                 } else if (selectionCount === 3){
                     selectedCard.animate({
                         top:"90vh",
-                        left:($(document).width() / 2) + 400,
+                        left:(my.getGutterOffset(selectedCard) + 400)
                     });
                     
                     my.phase2();
@@ -57,6 +65,23 @@ var cardSelectApp = (function () {
             })
         });
     };
+                
+    my.repositionGutter = debounce(function() {
+        
+        var card1 = $("#selected_card_1");
+        var card2 = $("#selected_card_2");
+        var card3 = $("#selected_card_3");
+        
+        card1.css('left',my.getGutterOffset(card1) - 400);
+        card2.css('left',my.getGutterOffset(card2));
+        card3.css('left',my.getGutterOffset(card3) + 400);
+    }, 250);
+    
+    my.getGutterOffset = function(residentCard){
+        //debugger;
+        return ($(document).width() / 2) - (residentCard.width() / 2);
+    }
+    
     
     //console.log(document.innerHTML);
     
@@ -81,12 +106,6 @@ var cardSelectApp = (function () {
             /*$(".selectedCard")
                 .wrap("<div class='flipContainer flipped'></div>")
                 .wrap("<div class='flipper'></div>");*/
-            
-            $(".selectedCard img")
-                .wrap("<div class='cardFront'></div>");
-            
-            $(".selectedCard .cardFront")
-                .after("<div class='cardBack'></div>");
             
             $("div.selectedCard:nth-child(1)").on('click',my.next);
             $("div.selectedCard:nth-child(1) .cardBack").after("<p>Past</p>");
@@ -155,8 +174,25 @@ var cardSelectApp = (function () {
         
     }
 
+    $(window).resize(my.repositionGutter());
     
     return my;
+                
+                
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+    };
+};
     
 }());
 

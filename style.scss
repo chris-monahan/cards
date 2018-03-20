@@ -1,17 +1,33 @@
 body{
-    background-color:gainsboro;
+    background-color:white;
 }
 
 .card{
-        display:inline-block;
-    }
+    display:inline-block;
+}
 
 .card img,
 .cardBack{
     width:100%;
-    border-radius:20px;
+    border-radius:20px; 
 
 }
+
+.cardFront{
+    z-index:1;
+    transition:opacity 1s ease-in-out;
+    opacity:1;
+}
+
+
+.selectedCard.flipped .cardFront{
+    opacity:0;
+}
+
+.cardBack{
+    background-color:brown;
+}
+
 
 
 
@@ -21,19 +37,27 @@ body{
         display:inline-block;
         width:200px;
         padding:10px;
-        padding-bottom:10px;
+
+    }
+    
+    @media (max-width: 1000px){
+        .cardInner{
+
+            width:120px;
+
+        }
     }
     
     .card img:hover{
-    transform: scale(1.1);
-    cursor:pointer;
-}
+        transform: scale(1.1);
+        cursor:pointer;
+    }
     
     .card img{
-    margin:10px;
-    transition: 0.2s;
+        margin:10px;
+        transition: 0.2s;
 
-}
+    }
 
 
     .cardInner .selectedCard {
@@ -50,7 +74,8 @@ body{
 
     #cardGrid{
         margin-top:40px;
-        width:1400px;
+        width:100%;
+        max-width:1400px;
         margin:0 auto;
         text-align:center;
         margin-bottom:200px;
@@ -76,13 +101,26 @@ body{
 .phase2{
     margin:0 auto;
     text-align:center;
-    margin-top:10%;
+    margin-top:2em;
     
 
     .selectedCard img,
     .cardBack{
+        
         width:270px;
         height:414px;
+        
+        @media (max-width:1280px){
+            width:202.5px;
+            height:313px;
+        }
+        
+        @media (max-width:950px){
+            width:135px;
+            height:212px;
+        }
+        
+
     }
 
 
@@ -96,8 +134,20 @@ body{
     }
     .selectedCard {
         display:inline-block;
+        
         width:400px;
         height:500px;
+        
+        @media (max-width:1280px){
+            width:280px;
+            height:375px;
+        }
+        
+        @media (max-width:950px){
+            width:150px;
+            height:250px;
+        }
+        
         padding:10px;
         padding-bottom:10px;
         position:relative;
@@ -112,39 +162,23 @@ body{
             left:calc(50% - 135px);
         }
         
-        .cardBack{
-            background-color:brown;
-        }
-        
-        .cardFront{
-            z-index:1;
-            transition:opacity 1s ease-in-out;
-            opacity:0;
-        }
-        
-        
-        
     }
     
-    
-    .selectedCard.flipped{
-        .cardFront{
-            opacity:1;
-        }
-    }
-    
-    
-
-    
-    
-    
-
     
     .textContainer{
         border-top:3px solid black;
         padding-top:40px;
+        margin-right:1em;
+        margin-left:1em;
         
-        a#nextButton{
+        @media (min-width:800px){
+            margin-right:10%;
+            margin-left:10%;            
+        }
+
+        
+        a#nextButton,
+        a#resetButton{
         display:inline-block;
           border-radius: 16px;
           font-family: Arial;
@@ -155,18 +189,20 @@ body{
           border: solid #1f628d 0px;
           text-decoration: none;
           cursor:pointer;
+            margin-top:1em;
+            margin-left:2em;
+            margin-right:2em;
         }
-        a#nextButton:hover {
+        a#nextButton:hover,
+        a#resetButton:hover{
             background: #3c91fa;
             text-decoration: none;
         }
-        div.descriptionText {
+        div.descriptionText { 
             font-family: monospace;
             font-size: 14pt;
         }
     }
-    
-    
 
     
 }
