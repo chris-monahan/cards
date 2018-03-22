@@ -17,13 +17,10 @@ var cardSelectApp = (function () {
         $(".phase2").hide();
         
         $(".card").each(function(){
-            $(this).find("img")
-                .wrap("<div class='cardFront'></div>");
-            
-            $(this).find(".cardFront")
-                .after("<div class='cardBack'></div>");
             
             $(this).on("click", function(){
+                var clickedCard = $(this);
+                
                 selectionCount = selectionCount + 1;
                 $(this).find("img")
                     .wrap("<div class='selectedCard' id='selected_"+selectionCount+"'></div>");
@@ -40,31 +37,83 @@ var cardSelectApp = (function () {
                 selectedCard.css("left",startingPosition.left);
                 selectedCard.addClass("animated");
                 
-                
-                
-                if(selectionCount === 1){
+                if(detectIE() === false){
+                    //animated version
+                    if(selectionCount === 1){
 
-                    selectedCard.animate({
-                        top:"90vh",
-                        left:(my.getGutterOffset(selectedCard) - 400)
-                    });
-                } else if (selectionCount === 2){
-                    selectedCard.animate({
-                        top:"90vh",
-                        left:my.getGutterOffset(selectedCard)
-                    });
-                } else if (selectionCount === 3){
-                    selectedCard.animate({
-                        top:"90vh",
-                        left:(my.getGutterOffset(selectedCard) + 400)
-                    });
+                        selectedCard.animate({
+                            top:"90vh",
+                            left:(my.getGutterOffset(selectedCard) - 400)
+                        }, {complete: function(){
+                            my.addCardFlipFaces(selectedCard);
+
+                        }});
+                    } else if (selectionCount === 2){
+                        my.flipCard(1);
+                        selectedCard.animate({
+                            top:"90vh",
+                            left:my.getGutterOffset(selectedCard)
+                        }, {complete: function(){
+                            my.addCardFlipFaces(selectedCard);
+
+                        }});
+                    } else if (selectionCount === 3){
+                        my.flipCard(2);
+                        selectedCard.animate({
+                            top:"90vh",
+                            left:(my.getGutterOffset(selectedCard) + 400)
+                        }, {complete: function(){
+                            my.addCardFlipFaces(selectedCard);
+                        }});
+
+                        my.phase2();
+                    }
                     
-                    my.phase2();
+                } else {
+                    //simple IE version
+                    if(selectionCount === 1){ 
+
+                        selectedCard.css({
+                            bottom:"-150px",
+                            top:"",
+                            left:(my.getGutterOffset(selectedCard) - 400)
+                        });
+                        my.addCardFlipFaces(selectedCard);
+                    } else if (selectionCount === 2){
+                        my.flipCard(1);
+                        selectedCard.css({
+                            bottom:"-150px",
+                            top:"",
+                            left:my.getGutterOffset(selectedCard)
+                        });
+                        
+                        my.addCardFlipFaces(selectedCard);
+
+                    } else if (selectionCount === 3){
+                        my.flipCard(2);
+                        selectedCard.css({
+                            bottom:"-150px",
+                            top:"",
+                            left:(my.getGutterOffset(selectedCard) + 400)
+                        });
+                        
+                        my.addCardFlipFaces(selectedCard);
+
+                        my.phase2();
+                    }
                 }
                 
             })
         });
     };
+    
+    my.addCardFlipFaces = function(element){
+        element.find("img")
+                .wrap("<div class='cardFront'></div>");
+            
+        element.find(".cardFront")
+                .after("<div class='cardBack'></div>");
+    }
                 
     my.repositionGutter = debounce(function() {
         
@@ -153,9 +202,10 @@ var cardSelectApp = (function () {
         
         
     }
+
     
     my.flipCard = function(flipNum){
-        $("div.selectedCard:nth-child("+flipNum+")").toggleClass("flipped");
+        $("#selected_"+flipNum).toggleClass("flipped");
     }
     
     my.reset = function(){
@@ -191,8 +241,51 @@ var cardSelectApp = (function () {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
             if (callNow) func.apply(context, args);
+        };
+        
+   
     };
-};
+    
+     //detectIE() copied from https://codepen.io/gapcode/pen/vEJNZN by Mario
+    function detectIE() {
+      var ua = window.navigator.userAgent;
+
+      // Test values; Uncomment to check result …
+
+      // IE 10
+      // ua = 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)';
+
+      // IE 11
+      // ua = 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko';
+
+      // Edge 12 (Spartan)
+      // ua = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0';
+
+      // Edge 13
+      // ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586';
+
+      var msie = ua.indexOf('MSIE ');
+      if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+      }
+
+      var trident = ua.indexOf('Trident/');
+      if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+      }
+
+      var edge = ua.indexOf('Edge/');
+      if (edge > 0) {
+        // Edge (IE 12+) => return version number
+        return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+      }
+
+      // other browser
+      return false;
+    }
     
 }());
 

@@ -9,16 +9,23 @@ body {
   width: 100%;
   border-radius: 20px; }
 
-.cardFront {
+.selectedCard .cardFront {
   z-index: 1;
   transition: opacity 1s ease-in-out;
-  opacity: 1; }
+  opacity: 1;
+  position: relative; }
+.selectedCard .cardInner {
+  position: relative; }
+.selectedCard .cardBack {
+  background-color: brown;
+  position: absolute;
+  top: 10px;
+  width: calc(100%);
+  height: calc(100%);
+  z-index: 0; }
 
 .selectedCard.flipped .cardFront {
   opacity: 0; }
-
-.cardBack {
-  background-color: brown; }
 
 .phase1 .cardInner {
   display: inline-block;
@@ -29,10 +36,12 @@ body {
     width: 120px; } }
 .phase1 .card img:hover {
   transform: scale(1.1);
-  cursor: pointer; }
-.phase1 .card img {
-  margin: 10px;
+  cursor: pointer;
   transition: 0.2s; }
+.phase1 .card img {
+  margin: 10px; }
+.phase1 .cardBack {
+  left: 10px; }
 .phase1 .cardInner .selectedCard {
   transition: 0.2s; }
 .phase1 .cardInner .selectedCard.animated {

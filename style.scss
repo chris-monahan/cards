@@ -13,20 +13,41 @@ body{
 
 }
 
-.cardFront{
+
+.selectedCard{
+ 
+    .cardFront{
     z-index:1;
     transition:opacity 1s ease-in-out;
     opacity:1;
+    position:relative;
 }
 
+    .cardInner{
+        position:relative;
+    }
+
+
+    
+
+    .cardBack{
+
+        background-color: brown;
+        position: absolute;
+        top: 10px;
+        width:calc(100%);
+        height: calc(100%);
+        z-index:0;
+        
+
+    }
+
+
+}
 
 .selectedCard.flipped .cardFront{
-    opacity:0;
-}
-
-.cardBack{
-    background-color:brown;
-}
+        opacity:0;
+    }
 
 
 
@@ -51,12 +72,17 @@ body{
     .card img:hover{
         transform: scale(1.1);
         cursor:pointer;
+        transition: 0.2s;
     }
     
     .card img{
         margin:10px;
-        transition: 0.2s;
+        
 
+    }
+    
+    .cardBack{
+        left:10px;
     }
 
 
