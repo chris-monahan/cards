@@ -2,8 +2,11 @@
 <html>
 
 <head>
+    <!--    
+    It's strongly recommended that you edit the _theme.scss file and then run cards.scss through SASS 
+    rather than editing cards.css or cards.scss  directly
+    -->
     <link rel="stylesheet" href="cards.css" />
-    <link rel="stylesheet" href="theme.css" />
     
     <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -15,12 +18,24 @@
 <!--[if !IE]>-->
    <body>
 <!--<![endif]-->
-    <div id="cardSelectApp">
-    
-
+    <div id="cardSelectApp" style="display:none">
+    <a href="#_" class="back-link" onclick="my.navBack()">Back to main page</a>
+        
         <div class="phase1">
             <div id="cardSelectContainer" >
                 <div id="cardGrid">
+                    <!--
+                    Any number of images can be put here as long as they are at or near the right dimensions (roughly 400w x 600h)
+                    and the HTML *must* follow the format of:
+
+                    <div class="card">
+                        <div class="cardInner"> <img src="{image file name}" /> </div>
+                    </div>
+                    
+                    An ID is not strictly necessary.
+                    
+                    -->
+
                     <div class="card" id="card_1">
                         <div class="cardInner"> <img src="images/Scan_1.jpg" /> </div>
                     </div>
@@ -90,6 +105,12 @@
             <div class="cardContainer">
 
             </div>
+            
+            <!-- 
+            The following div's define the text for the different sub-stages of stage2
+            They are referenced based upon their ID so you will need to keep the id="text0" id="text1" etc.
+        
+            Please refer to the _theme.scss to safely adjust the styles for this text -->
 
             <div class="textContainer">
                 <div class="descriptionText" id="text0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia diam quis neque lobortis cursus. Fusce quis ligula aliquet, tempor ex ut, volutpat turpis. Ut orci diam, iaculis a pulvinar ut, posuere sit amet neque.</div>
@@ -98,8 +119,9 @@
                 <div class="descriptionText" id="text3">Sed cursus malesuada dolor quis tempor. Cras suscipit dui ut massa tristique, quis semper leo porttitor. Sed eget leo in orci condimentum vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur eget varius neque. Curabitur varius leo ut odio scelerisque pellentesque. Donec non tincidunt neque. Etiam interdum, magna at elementum laoreet, risus risus convallis ex, sed euismod sem est eu mauris. Suspendisse elit nisl, ultrices quis magna vitae, faucibus maximus urna.</div>
                 <div class="descriptionText" id="text4">Donec faucibus, ante vel rutrum cursus, dolor leo cursus dolor, vel sodales ligula nisi et lectus. Quisque elementum rhoncus erat quis dapibus. Ut eu viverra diam. Nullam tempus purus eget leo ornare fermentum. Phasellus sagittis tortor mi, a condimentum odio vulputate aliquet. Mauris pharetra vestibulum facilisis. Cras interdum sapien sed metus scelerisque pulvinar. Cras semper luctus urna, sit amet scelerisque nunc suscipit ac. Ut vel metus nec metus dapibus sagittis. Quisque et interdum lectus, eu dapibus mi. Curabitur at dictum ipsum, eu maximus est. Cras bibendum nunc sem, a sodales nisi vehicula sed.</div>
                 <div class="descriptionText" id="text5">Etiam finibus egestas odio, eget accumsan risus imperdiet a. Morbi in sagittis nisl. Donec eget purus lacinia, vehicula libero vel, euismod odio. Nullam quis felis at lacus vestibulum dapibus. In hac habitasse platea dictumst. Duis quis tempus orci. Nulla facilisi. Nulla eu accumsan mauris.</div>
-                <a role="button" id="nextButton" onclick="cardSelectApp.next()">Next</a>
-                <a role="button" id="resetButton" onclick="cardSelectApp.reset()">Reset</a>
+                <a role="button" href="#_" id="resetButton" onclick="cardSelectApp.reset()">Reset</a>
+                <a role="button" href="#_" id="nextButton" onclick="cardSelectApp.next()">Next</a>
+                
             </div>
 
         </div>
@@ -107,8 +129,9 @@
     </div>
     
 
-<script type="application/javascript" src="cards.js"> 
-</script>
+    <!-- Placing main script at end of document so it runs after everything else has loaded -->
+    <script type="application/javascript" src="cards.min.js"> 
+    </script>
     
 </body>
 

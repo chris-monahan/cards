@@ -1,248 +1,236 @@
+@import '_theme';
 
-@import '_theme' ;
+body {
+    background-color: transparent;
+}
 
-
-/* rest of CSS */
-body{
-    background-color:transparent;
-} 
-
-#cardSelectApp{
-    .card{
+#cardSelectApp.backLinkActive{
+    margin-top:3em;
+    
+    a.back-link{
         display:inline-block;
     }
+}
 
-    .card img,
-    .cardBack{
-        width:100%;
-        border-radius:$card-border-radius; 
-
+#cardSelectApp {
+    a.back-link {
+        display:none;
     }
-
-
-    .selectedCard{
-
-        .cardFront{
-        z-index:1;
-        transition:opacity 1s ease-in-out;
-        opacity:1;
-        position:relative;
+    a.back-link {
+        position: absolute;
+        right: 30px;
+        top: 1em;
+        text-decoration: none;
+        font-family: arial;
+        color: grey;
+        font-size: 14px;
+        width: 150px;
+        height: 2em;
+        padding-bottom: 10px;
     }
-
-        .cardInner{
-            position:relative;
+    a.back-link:hover {
+        border-bottom: 1px solid grey;
+    }
+    a.back-link:after {
+        position: relative;
+        content: "X";
+        padding-left: 10px;
+        font-size: 2em;
+        top: 5px;
+        text-decoration: none;
+    }
+    .card {
+        display: inline-block;
+        
+        img,.cardBack {
+            width: 100%;
+            border-radius: $card-border-radius;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        
         }
-
-
-
-
-        .cardBack{
-
+    }
+    
+    .selectedCard {
+        .cardFront {
+            z-index: 1;
+            transition: opacity 1s ease-in-out;
+            opacity: 1;
+            position: relative;
+        }
+        .cardInner {
+            position: relative;
+        }
+        .cardBack {
             position: absolute;
             top: 10px;
-            width:calc(100%);
+            width: calc(100%);
             height: calc(100%);
-            z-index:0;
-
-
+            z-index: 0;
         }
-
-
     }
-
-    .selectedCard.flipped .cardFront{
-            opacity:0;
-        }
-
-
-
-
-
+    .selectedCard.flipped .cardFront {
+        opacity: 0;
+    }
     .phase1 {
-        .cardInner{
-            display:inline-block;
-            width:200px;
-            padding:10px;
-
+        .cardInner {
+            display: inline-block;
+            width: 200px;
+            padding: 10px;
         }
-
-        @media (max-width: 1000px){
-            .cardInner{
-
-                width:120px;
-
+        @media (max-width: 1000px) {
+            .cardInner {
+                width: 120px;
             }
         }
-
-        .card img:hover{
+        .card img:hover, .cardBack:hover {
             transform: scale(1.1);
-            cursor:pointer;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+        .card img {
+            margin: 10px;
+        }
+        .cardBack {
+            left: 10px;
+        }
+        .cardInner .selectedCard {
             transition: 0.2s;
         }
-
-        .card img{
-            margin:10px;
-
-
-        }
-
-        .cardBack{
-            left:10px;
-        }
-
-
-        .cardInner .selectedCard {
-            transition:0.2s; 
-        }
-
-        .cardInner .selectedCard.animated{
-            position:fixed;
-            z-index:2;
-            width:$card-grid-margin-bottom;
+        .cardInner .selectedCard.animated {
+            position: fixed;
+            z-index: 2;
+            width: $card-grid-margin-bottom;
             /*top:100%;*/
         }
-
-
-        #cardGrid{
-            margin-top:40px;
-            width:100%;
-            max-width:1400px;
-            margin:0 auto;
-            text-align:center;
-            margin-bottom:200px;
+        #cardGrid {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 200px;
         }
-        
-        #selectedCardsArea{
-            display:none;
+        #selectedCardsArea {
+            display: none;
         }
-
-        #selectedCardsArea.active{
-            width:100%;
-            display:block;
-            background:white;
-            z-index:1;
-            position:fixed;
-            bottom:0px;
-
-            @include selected-card-gutter-background; 
+        #selectedCardsArea.active {
+            width: 100%;
+            display: block;
+            background: white;
+            z-index: 1;
+            position: fixed;
+            bottom: 0px;
+            @include selected-card-gutter-background;
         }
     }
-
-    .phase2{
-        margin:0 auto;
-        text-align:center;
-        margin-top:2em;
-
-
+    .phase2 {
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 2em;
         .selectedCard img,
-        .cardBack{
-
-            width:270px;
-            height:414px;
-
-            @media (max-width:1280px){
-                width:202.5px;
-                height:313px;
+        .cardBack {
+            width: 270px;
+            height: 414px;
+            @media (max-width: 1280px) {
+                width: 202.5px;
+                height: 313px;
             }
-
-            @media (max-width:950px){
-                width:135px;
-                height:212px;
+            @media (max-width:950px) {
+                width: 135px;
+                height: 212px;
             }
-
-
-        }
-
-
-
-        .selectedCard p{
-            bottom:20px;
-            font-family: $main-font-family;
-            font-size: $main-font-size;
-            text-align:center;
-            margin-top:calc(100% + 30px);
         }
         .selectedCard {
-            display:inline-block;
-
-            width:400px;
-            height:500px;
-
-            @media (max-width:1280px){
-                width:280px;
-                height:375px;
+            display: inline-block;
+            width: 400px;
+            height: 500px;
+            @media (max-width: 1280px) {
+                width: 280px;
+                height: 375px;
             }
-
-            @media (max-width:950px){
-                width:150px;
-                height:250px;
+            @media (max-width:950px) {
+                width: 150px;
+                height: 250px;
             }
-
             padding:10px;
             padding-bottom:10px;
             position:relative;
             text-align:center;
             vertical-align:bottom;
-
             z-index:0;
-
-            .cardBack, .cardFront{
-                position:absolute;
-                top:0px;
-                left:calc(50% - 135px);
+            .cardBack,
+            .cardFront {
+                position: absolute;
+                top: 0px;
+                left: calc(50% - 135px);
+                @media (max-width:1280px){
+                    left: calc(50% - 105px);
+                }
+                @media (max-width:950px){
+                    
+                    left: calc(50% - 105px);
+                }
             }
-
-        }
-
-
-        .textContainer{
             
-
-
+            p {
+                bottom: 20px;
+                font-family: $main-font-family;
+                font-size: $main-font-size;
+                text-align: center;
+                margin-top: calc(100% + 30px);
+                @media (max-width:950px){
+                    position:relative;
+                    top:30px;
+                    left: calc(50% - 115px);
+                }
+            }
+            
+        }
+        .selectedCard.nextClickable {
+            .cardFront {
+                cursor: pointer;
+            }
+            p {
+                text-decoration: underline;
+            }
+        }
+        .textContainer {
             a#nextButton,
-            a#resetButton{
+            a#resetButton {
                 @include action-button;
             }
             a#nextButton:hover,
-            a#resetButton:hover{
+            a#resetButton:hover {
                 @include action-button-hover;
             }
-            div.descriptionText { 
+            div.descriptionText {
                 font-family: $main-font-family;
                 font-size: $main-font-size;
+                transition:0.5s display;
+                min-height:200px;
             }
-            
             @include text-area-bottom;
         }
-
-    
     }
-
-
 }
 
 
 /* primarily themed elements here */
 
-
-
-
-html body{
+html body {
     background-color: $body-color;
 }
 
-#cardSelectApp{
-    
-    .cardBack{
+#cardSelectApp {
+    .cardBack {
         background-color: $card-back-color;
         border-width: $card-back-border-width;
         border-color: $card-back-border-color;
+        border-style: solid;
+        box-sizing: border-box;
     }
-    
-    #selectedCardsArea{
-        height:$selected-card-gutter-height;
+    #selectedCardsArea {
+        height: $selected-card-gutter-height;
     }
-    
-} 
-
-
+}
