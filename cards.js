@@ -3,8 +3,15 @@
 
 var cardSelectApp = (function () {
     "use strict";
+	
+	if(typeof jQuery !== "undefined"){
+		var $ = jQuery;
+	}
+	
+	if(typeof $ === "undefined"){
+		throw "jQuery required for the card picker game"
+	}
     
-    var $ = jQuery;
     var frameCount;
     var my = {};
     
@@ -12,11 +19,30 @@ var cardSelectApp = (function () {
     
     //this init function will be called at the end of this inline body function
     my.init = function () {
+		
+		$(window).resize(my.repositionGutter);
         
         if(   getQueryParamByName("backlink") === "true" 
-           || getQueryParamByName("backlink") === "y"){
+           || getQueryParamByName("backlink") === "y"
+		   || getQueryParamByName("backlink") === "button"){
             $("#cardSelectApp").addClass("backLinkActive");
-            var backlinkURL = getQueryParamByName("backlinkURL");
+            var backlinkURL = my.resolveBacklinkURL(getQueryParamByName("backlinkURL"));
+			
+			
+			
+			if(backlinkURL !== null){
+				$("#back-link").attr("href",backlinkURL);
+			} else {
+				//debugger;
+				$("#back-link").click(my.navBack);
+			}
+			
+			if(getQueryParamByName("backlink") === "button"){
+				$("#back-link").addClass("buttonStyle");
+			} else {
+				$("#back-link").addClass("linkStyle");
+			}
+				
         }
         
         //console.log("hello world");
@@ -53,7 +79,7 @@ var cardSelectApp = (function () {
 
                         selectedCard.animate({
                             top: "90vh",
-                            left: (my.getGutterOffset(selectedCard) - 400)
+                            left: my.getGutterOffset(selectedCard, 0)
                         }, {
                             complete: function () {
                                 my.addCardFlipFaces(selectedCard);
@@ -64,7 +90,7 @@ var cardSelectApp = (function () {
                         my.flipCard(1);
                         selectedCard.animate({
                             top: "90vh",
-                            left: my.getGutterOffset(selectedCard)
+                            left: my.getGutterOffset(selectedCard, 1)
                         }, {
                             complete: function () {
                                 my.addCardFlipFaces(selectedCard);
@@ -75,7 +101,7 @@ var cardSelectApp = (function () {
                         my.flipCard(2);
                         selectedCard.animate({
                             top: "90vh",
-                            left: (my.getGutterOffset(selectedCard) + 400)
+                            left: my.getGutterOffset(selectedCard, 2)
                         }, {
                             complete: function () {
                                 my.addCardFlipFaces(selectedCard);
@@ -130,6 +156,29 @@ var cardSelectApp = (function () {
         element.find(".cardFront")
             .after("<div class='cardBack'></div>");
     }
+	
+	my.resolveBacklinkURL = function(sourceURL){
+		//debugger;
+		if(sourceURL === null){
+			return null;
+		} else{
+			try{
+				return new URL(sourceURL).href;
+			} catch(e) {
+				if(sourceURL.substr(0,2) === '//'){
+						return new URL(window.location.protocol + sourceURL).href;
+					}
+				else if(sourceURL.search(".") === -1){
+					return sourceURL;
+				} else if(sourceURL.substr(0,4) !== 'http') { 
+					return new URL(window.location.protocol + '//' + sourceURL).href;
+				} else {
+					return sourceURL;
+				}
+			}
+		}
+		
+	}
 
     my.repositionGutter = debounce(function () {
         console.log("called");
@@ -140,15 +189,33 @@ var cardSelectApp = (function () {
         console.log(card1);
         console.log(card2);
         console.log(card3);
+		
 
-        card1.css('left', my.getGutterOffset(card1) - 400);
-        card2.css('left', my.getGutterOffset(card2));
-        card3.css('left', my.getGutterOffset(card3) + 400);
+		card1.css('left', my.getGutterOffset(card1,0));
+		card2.css('left', my.getGutterOffset(card2,1));
+		card3.css('left', my.getGutterOffset(card3,2))
     }, 250);
 
-    my.getGutterOffset = function (residentCard) {
-        //debugger;
-        return ($(document).width() / 2) - (residentCard.width() / 2);
+    my.getGutterOffset = function (residentCard, position) {
+        var baseOffset = ($(document).width() / 2) - (residentCard.width() / 2);
+		var scalar = 0;
+		var positionOffset = 0;
+		
+		if(position === 0){
+			scalar = -1;
+		} else if (position === 2){
+			scalar = 1;
+		}
+		
+		if($(document).width() > 1050){
+			positionOffset = 400;
+		} else if($(document).width() > 750) {
+			positionOffset = 250;
+		} else{
+			positionOffset = 180;
+		}
+		
+		return baseOffset + (positionOffset * scalar);
     }
 
 
@@ -187,7 +254,7 @@ var cardSelectApp = (function () {
             card2.slideDown(500);
             
             card3.insertAfter(card2);
-            card3.slideDown(500);
+            card3.slideDown(500); 
                 
 
             /*$(".selectedCard")
@@ -225,14 +292,17 @@ var cardSelectApp = (function () {
         } else if (frameCount === 3) {
             my.flipCard(2);
             my.flipCard(3);
-        } else if (frameCount === 4) {
+			$("#nextButton").text("Show All")
+        /*} else if (frameCount === 4) {
             $("div.selectedCard:nth-child(3)").toggleClass('nextClickable')
             my.flipCard(3);
+            $("#nextButton").text("Show All");*/
             $("#nextButton").text("Show All");
-        } else if (frameCount === 5) {
+        } else if (frameCount === 4) {
+			$("div.selectedCard:nth-child(3)").toggleClass('nextClickable')
             my.flipCard(1);
             my.flipCard(2);
-            my.flipCard(3);
+            //my.flipCard(3);
             $("a#nextButton").hide();
         }
 
@@ -292,17 +362,10 @@ var cardSelectApp = (function () {
     }
 
     my.navBack = function () {
-        if(navbackURL === undefined ||
-           navbackURL === null ||
-           navbackURL === '' ||
-          !navbackURL){
-            window.history.back();
-        } else {
-            window.location(navbackURL);
-        }
+		//debugger;
+		window.history.back();
     }
 
-    $(window).resize(my.repositionGutter);
 
     return my;
 
@@ -376,8 +439,11 @@ var cardSelectApp = (function () {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+	
+	
 
 }());
 
-
 $(window).on("load", cardSelectApp.init());
+
+

@@ -7,19 +7,26 @@
     rather than editing cards.css or cards.scss  directly
     -->
     <link rel="stylesheet" href="cards.css" />
-    
-    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+	<!--[if IE]>
+	   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	   <script type="application/javascript" src="iepolyfill.min.js"></script>
+	<![endif]-->
+	<!--[if !IE]>-->
+	
+		<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="application/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+	<!--<![endif]-->
 </head> 
 
-<!--[if IE ]>
+<!--[if IE]>
    <body class="ie">
 <![endif]-->
 <!--[if !IE]>-->
    <body>
 <!--<![endif]-->
-    <div id="cardSelectApp" style="display:none">
-    <a href="#_" class="back-link" onclick="my.navBack()">Back to main page</a>
+    <div id="cardSelectApp">
+    <a id="back-link" href="javascript:undefined">Back to main page</a>
         
         <div class="phase1">
             <div id="cardSelectContainer" >

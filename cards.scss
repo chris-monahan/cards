@@ -7,19 +7,32 @@ body {
 #cardSelectApp.backLinkActive{
     margin-top:3em;
     
-    a.back-link{
+    a#back-link{
         display:inline-block;
+		cursor:pointer;
+		
     }
+	
+	a#back-link.buttonStyle{
+		@include action-button;
+	}
 }
 
 #cardSelectApp {
-    a.back-link {
+    a#back-link {
         display:none;
+		position: absolute;
     }
-    a.back-link {
-        position: absolute;
-        right: 30px;
+	a#back-link.buttonStyle{
+		top:5px;
+		right:5px;
+        
+	}
+	
+    a#back-link.linkStyle {
+		right: 30px;
         top: 1em;
+	
         text-decoration: none;
         font-family: arial;
         color: grey;
@@ -28,10 +41,10 @@ body {
         height: 2em;
         padding-bottom: 10px;
     }
-    a.back-link:hover {
+    a#back-link.linkStyle:hover {
         border-bottom: 1px solid grey;
     }
-    a.back-link:after {
+    a#back-link.linkStyle:after {
         position: relative;
         content: "X";
         padding-left: 10px;
@@ -76,12 +89,10 @@ body {
             display: inline-block;
             width: 200px;
             padding: 10px;
-        }
-        @media (max-width: 1000px) {
-            .cardInner {
-                width: 120px;
-            }
-        }
+			@media (max-width: 1000px) {
+				width: 120px;
+			}
+		}
         .card img:hover, .cardBack:hover {
             transform: scale(1.1);
             cursor: pointer;
@@ -100,8 +111,11 @@ body {
         .cardInner .selectedCard.animated {
             position: fixed;
             z-index: 2;
-            width: $card-grid-margin-bottom;
             /*top:100%;*/
+			width:200px;
+			@media (max-width: 1000px) {
+                width: 120px;
+			}
         }
         #cardGrid {
             margin-top: 40px;
@@ -132,7 +146,7 @@ body {
         .cardBack {
             width: 270px;
             height: 414px;
-            @media (max-width: 1280px) {
+            @media (max-width: 1300px) {
                 width: 202.5px;
                 height: 313px;
             }
@@ -145,7 +159,7 @@ body {
             display: inline-block;
             width: 400px;
             height: 500px;
-            @media (max-width: 1280px) {
+            @media (max-width: 1300px) {
                 width: 280px;
                 height: 375px;
             }
@@ -164,12 +178,16 @@ body {
                 position: absolute;
                 top: 0px;
                 left: calc(50% - 135px);
-                @media (max-width:1280px){
+                @media (max-width:1300px){
                     left: calc(50% - 105px);
                 }
                 @media (max-width:950px){
                     
-                    left: calc(50% - 105px);
+                    left: calc(50% - 80px);
+                }
+				@media (max-width:500px){
+                    
+                    left: calc(50% - 70px);
                 }
             }
             
@@ -182,7 +200,11 @@ body {
                 @media (max-width:950px){
                     position:relative;
                     top:30px;
-                    left: calc(50% - 115px);
+                    left: calc(50% - 85px);
+                }
+				@media (max-width:500px){
+                    
+                    left: calc(50% - 75px);
                 }
             }
             

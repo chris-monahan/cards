@@ -2,23 +2,36 @@
 /* Mixins used for the 'next', 'showall' and 'reset' buttons */
 /* Mixin used for the selected card gutter gradient background */
 /* Mixin used for the 'description text' area at the bottom of phase 2 */
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\000033}}
 body {
   background-color: transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\000037}}
 #cardSelectApp.backLinkActive {
   margin-top: 3em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000310}}
-  #cardSelectApp.backLinkActive a.back-link {
-    display: inline-block; }
+  #cardSelectApp.backLinkActive a#back-link {
+    display: inline-block;
+    cursor: pointer; }
+  #cardSelectApp.backLinkActive a#back-link.buttonStyle {
+    display: inline-block;
+    border-radius: 16px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    background: #346bd9;
+    padding: 10px 20px 10px 20px;
+    border: solid #1f628d 0px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-left: 2em;
+    margin-right: 2em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000316}}
-#cardSelectApp a.back-link {
-  display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000319}}
-#cardSelectApp a.back-link {
-  position: absolute;
+#cardSelectApp a#back-link {
+  display: none;
+  position: absolute; }
+#cardSelectApp a#back-link.buttonStyle {
+  top: 5px;
+  right: 5px; }
+#cardSelectApp a#back-link.linkStyle {
   right: 30px;
   top: 1em;
   text-decoration: none;
@@ -28,75 +41,62 @@ body {
   width: 150px;
   height: 2em;
   padding-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000331}}
-#cardSelectApp a.back-link:hover {
+#cardSelectApp a#back-link.linkStyle:hover {
   border-bottom: 1px solid grey; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000334}}
-#cardSelectApp a.back-link:after {
+#cardSelectApp a#back-link.linkStyle:after {
   position: relative;
   content: "X";
   padding-left: 10px;
   font-size: 2em;
   top: 5px;
   text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000342}}
 #cardSelectApp .card {
   display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000345}}
   #cardSelectApp .card img, #cardSelectApp .card .cardBack {
     width: 100%;
     border-radius: 20px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000354}}
 #cardSelectApp .selectedCard .cardFront {
   z-index: 1;
   transition: opacity 1s ease-in-out;
   opacity: 1;
   position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000360}}
 #cardSelectApp .selectedCard .cardInner {
   position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000363}}
 #cardSelectApp .selectedCard .cardBack {
   position: absolute;
   top: 10px;
   width: calc(100%);
   height: calc(100%);
   z-index: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000371}}
 #cardSelectApp .selectedCard.flipped .cardFront {
   opacity: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000375}}
 #cardSelectApp .phase1 .cardInner {
   display: inline-block;
   width: 200px;
   padding: 10px; }
-@media (max-width: 1000px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000381}}
-  #cardSelectApp .phase1 .cardInner {
-    width: 120px; } }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000385}}
+  @media (max-width: 1000px) {
+    #cardSelectApp .phase1 .cardInner {
+      width: 120px; } }
 #cardSelectApp .phase1 .card img:hover, #cardSelectApp .phase1 .cardBack:hover {
   transform: scale(1.1);
   cursor: pointer;
   transition: 0.2s;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000391}}
 #cardSelectApp .phase1 .card img {
   margin: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000394}}
 #cardSelectApp .phase1 .cardBack {
   left: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\0000397}}
 #cardSelectApp .phase1 .cardInner .selectedCard {
   transition: 0.2s; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003100}}
 #cardSelectApp .phase1 .cardInner .selectedCard.animated {
   position: fixed;
   z-index: 2;
-  width: 200px;
-  /*top:100%;*/ }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003106}}
+  /*top:100%;*/
+  width: 200px; }
+  @media (max-width: 1000px) {
+    #cardSelectApp .phase1 .cardInner .selectedCard.animated {
+      width: 120px; } }
 #cardSelectApp .phase1 #cardGrid {
   margin-top: 40px;
   width: 100%;
@@ -104,10 +104,8 @@ body {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 200px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003114}}
 #cardSelectApp .phase1 #selectedCardsArea {
   display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003117}}
 #cardSelectApp .phase1 #selectedCardsArea.active {
   width: 100%;
   display: block;
@@ -124,29 +122,24 @@ body {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#ffffff',GradientType=0 );
   /* IE6-9 */ }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003127}}
 #cardSelectApp .phase2 {
   margin: 0 auto;
   text-align: center;
   margin-top: 2em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003131}}
   #cardSelectApp .phase2 .selectedCard img,
   #cardSelectApp .phase2 .cardBack {
     width: 270px;
     height: 414px; }
-    @media (max-width: 1280px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003131}}
+    @media (max-width: 1300px) {
       #cardSelectApp .phase2 .selectedCard img,
       #cardSelectApp .phase2 .cardBack {
         width: 202.5px;
         height: 313px; } }
     @media (max-width: 950px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003131}}
       #cardSelectApp .phase2 .selectedCard img,
       #cardSelectApp .phase2 .cardBack {
         width: 135px;
         height: 212px; } }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003144}}
   #cardSelectApp .phase2 .selectedCard {
     display: inline-block;
     width: 400px;
@@ -157,33 +150,31 @@ body {
     text-align: center;
     vertical-align: bottom;
     z-index: 0; }
-    @media (max-width: 1280px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003144}}
+    @media (max-width: 1300px) {
       #cardSelectApp .phase2 .selectedCard {
         width: 280px;
         height: 375px; } }
     @media (max-width: 950px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003144}}
       #cardSelectApp .phase2 .selectedCard {
         width: 150px;
         height: 250px; } }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003162}}
     #cardSelectApp .phase2 .selectedCard .cardBack,
     #cardSelectApp .phase2 .selectedCard .cardFront {
       position: absolute;
       top: 0px;
       left: calc(50% - 135px); }
-      @media (max-width: 1280px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003162}}
+      @media (max-width: 1300px) {
         #cardSelectApp .phase2 .selectedCard .cardBack,
         #cardSelectApp .phase2 .selectedCard .cardFront {
           left: calc(50% - 105px); } }
       @media (max-width: 950px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003162}}
         #cardSelectApp .phase2 .selectedCard .cardBack,
         #cardSelectApp .phase2 .selectedCard .cardFront {
-          left: calc(50% - 105px); } }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003176}}
+          left: calc(50% - 80px); } }
+      @media (max-width: 500px) {
+        #cardSelectApp .phase2 .selectedCard .cardBack,
+        #cardSelectApp .phase2 .selectedCard .cardFront {
+          left: calc(50% - 70px); } }
     #cardSelectApp .phase2 .selectedCard p {
       bottom: 20px;
       font-family: monospace;
@@ -191,24 +182,22 @@ body {
       text-align: center;
       margin-top: calc(100% + 30px); }
       @media (max-width: 950px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003176}}
         #cardSelectApp .phase2 .selectedCard p {
           position: relative;
           top: 30px;
-          left: calc(50% - 115px); } }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003191}}
+          left: calc(50% - 85px); } }
+      @media (max-width: 500px) {
+        #cardSelectApp .phase2 .selectedCard p {
+          left: calc(50% - 75px); } }
   #cardSelectApp .phase2 .selectedCard.nextClickable .cardFront {
     cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003194}}
   #cardSelectApp .phase2 .selectedCard.nextClickable p {
     text-decoration: underline; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003198}}
   #cardSelectApp .phase2 .textContainer {
     border-top: 3px solid black;
     padding-top: 40px;
     margin-right: 1em;
     margin-left: 1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003199}}
     #cardSelectApp .phase2 .textContainer a#nextButton,
     #cardSelectApp .phase2 .textContainer a#resetButton {
       display: inline-block;
@@ -224,32 +213,27 @@ body {
       margin-top: 1em;
       margin-left: 2em;
       margin-right: 2em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003203}}
     #cardSelectApp .phase2 .textContainer a#nextButton:hover,
     #cardSelectApp .phase2 .textContainer a#resetButton:hover {
       background: #3c91fa;
       text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003207}}
     #cardSelectApp .phase2 .textContainer div.descriptionText {
       font-family: monospace;
       font-size: 14pt;
       transition: 0.5s display;
       min-height: 200px; }
     @media (min-width: 800px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003198}}
       #cardSelectApp .phase2 .textContainer {
         margin-right: 10%;
         margin-left: 10%; } }
 
 /* primarily themed elements here */
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003226}}
 #cardSelectApp .cardBack {
   background-color: #9c5d31;
   border-width: 3px;
   border-color: black;
   border-style: solid;
   box-sizing: border-box; }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ChristopherM\/Desktop\/Cards\/cards\.scss}line{font-family:\00003233}}
 #cardSelectApp #selectedCardsArea {
   height: 100px; }
 
